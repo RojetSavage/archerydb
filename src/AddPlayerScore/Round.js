@@ -1,20 +1,19 @@
-import { StyleSheet, View, TouchableOpacity, Image, Text } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
 import { ListItem, Icon } from "@rneui/themed";
 import { Button } from "@rneui/base";
 import { useNavigation } from "@react-navigation/native";
 
-export default function Round({ roundName, idx, competitionId, playerName, archerId, archerClassification }) {
+export default function Round({ roundName, idx, competitionId, possibleScore, totalArrows }) {
 	const navigation = useNavigation();
 
 	return (
 		<>
-			<TouchableOpacity onPress={() => navigation.navigate("Select Player's Stage", {roundName, competitionId, playerName, archerClassification, archerId})}>
+			<TouchableOpacity onPress={() => navigation.navigate("Select Player", { competitionId, roundName })}>
 				<ListItem >
 					<ListItem.Content style={styles.listItemContainer}>
 						<View >
-							<ListItem.Title>{roundName}</ListItem.Title>
-							<ListItem.Subtitle>{archerClassification}</ListItem.Subtitle>
-
+							<ListItem.Title>{roundName} - {totalArrows} arrows.</ListItem.Title>
+							<ListItem.Subtitle>Max Score Possible: {possibleScore} </ListItem.Subtitle>
 						</View>
 
 						<Button type="clear" >

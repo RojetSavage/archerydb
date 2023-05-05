@@ -11,7 +11,7 @@ export default function Competition({ id, date, name }) {
 	return (
 		<>
 			{/* <TouchableOpacity onPress={() => navigation.navigate("Select Player", { id })} > */}
-			<TouchableOpacity onPress={() => navigation.navigate("Select Round", { id })} >
+			<TouchableOpacity onPress={() => navigation.navigate("Select Round", { competitionId: id })} >
 				<ListItem >
 					<Image source={require('../../assets/crown.png')} style={{ height: 40, width: 40 }} />
 					<ListItem.Content style={styles.listItemContainer}>

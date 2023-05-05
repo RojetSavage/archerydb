@@ -3,26 +3,26 @@ import { useState, useEffect } from 'react'
 import Round from './Round';
 
 export default function SelectCompetitionRound({ route }) {
-	const { playerName, competitionId, archerClassification, archerId } = route.params;
-	const [playersAvailableRounds, setPlayersAvailableRounds] = useState([])
+	const { competitionId } = route.params;
+	const [availableCompetitionRounds, setAvailableCompetitionRounds] = useState([])
 
 	useEffect(() => {
-		fetch('http://10.1.1.140:3001/competition/rounds/archer/id', {
+		fetch('http://10.1.1.140:3001/competition/rounds/id', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify({ archerClassification })
+			body: JSON.stringify({ competitionId })
 		})
 			.then(res => res.json())
 			.then(data => {
-				setPlayersAvailableRounds(data)
+				setAvailableCompetitionRounds(data)
 			})
 	}, [])
 
 	return (
 		<View>
-			{playersAvailableRounds.map((round, idx) => <Round archerId={archerId} idx={idx} key={idx} roundName={round.round_name} competitionId={competitionId} playerName={playerName} archerClassification={archerClassification} />)}
+			{availableCompetitionRounds.map((round, idx) => <Round idx={idx} key={idx} roundName={round.round_name} possibleScore={round.possible_score} competitionId={competitionId} totalArrows={round.total_arrows} />)}
 		</View>
 	)
 }

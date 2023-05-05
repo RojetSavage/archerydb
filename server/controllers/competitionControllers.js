@@ -72,6 +72,7 @@ export const getAllCompetitionRounds = async (req, res) => {
 
 export const getCompetitionRounds = async (req, res) => {
 	const { competitionId } = req.body;
+	console.log(competitionId)
 
 	db.query(`SELECT competition_rounds.competition_id, competition_rounds.round_name, round.total_arrows, round.possible_score FROM competition_rounds INNER JOIN round ON competition_rounds.round_name=round.name WHERE competition_id = ${competitionId}`, 
 	(error, result) => {
@@ -148,6 +149,31 @@ export const getCompetitionStages = async (req, res) => {
 
 	console.log(roundName)
 	db.query(`SELECT round_stages.round_name, stage.round_type, stage.distance, stage.id FROM round_stages INNER JOIN stage ON round_stages.stage_id = stage.id WHERE round_name="${roundName}"`, 
+
+	(error, result) => {
+		if (error) {
+			console.log(error)
+			res.send(error)
+		} else {
+			res.send(result)
+		}
+	}) 
+}
+
+
+export const getCompetitionPlayersForRound = async (req, res) => {
+	const { competitionId, roundName } = req.body;
+	console.log(competitionId, roundName)
+	
+	db.query(`SELECT a.name, a.classification_type, a.gender, a.id, ca.competition_id AS comp_id
+	FROM archer AS a
+	JOIN competition_archers AS ca
+	ON a.id = ca.archer_id
+	WHERE competition_id=${competitionId} AND a.classification_type IN (
+		SELECT acr.archer_classification 
+		FROM available_competition_rounds AS acr
+		WHERE acr.round_name = "${roundName}"
+	)`, 
 
 	(error, result) => {
 		if (error) {

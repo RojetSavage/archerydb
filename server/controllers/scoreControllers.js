@@ -1,6 +1,5 @@
 import db from "../db.js";
 
-
 export const checkIfStageScoreExists = async (req, res) => {
 	const { isCompetitionScore, competitionId, archerId, roundName, stageId, bowType } = req.body;
 	console.log(isCompetitionScore, competitionId, archerId, roundName, stageId, bowType)
@@ -13,7 +12,6 @@ export const checkIfStageScoreExists = async (req, res) => {
 		}
 	})
 }
-
 
 export const addStageScore = async (req, res) => {
 	const { isCompetitionScore, competitionId, archerId, roundName, stageId, bowType } = req.body;
@@ -29,7 +27,6 @@ export const addStageScore = async (req, res) => {
 	})
 }
 
-
 export const getStageId = async (req, res) => {
 	const { isCompetitionScore, competitionId, archerId, roundName, stageId, bowType } = req.body;
 
@@ -41,7 +38,6 @@ export const getStageId = async (req, res) => {
 		}
 	})
 }
-
 
 export const addEndsToStage = async (req, res) => {
 	const { stageScoreId } = req.body;
@@ -61,9 +57,6 @@ export const addEndsToStage = async (req, res) => {
 		}
 	})
 }
-
-
-
 
 export const getScorecard = async (req, res) => {
 	const { isCompetitionScore, competitionId, archerId, roundName, stageId, bowType } = req.body;

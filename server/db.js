@@ -18,7 +18,7 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
 	if (err) throw err;
-	console.log("Connected")
+	console.log(`Connected as ${db.threadId}`)
 })
 
 export default db;

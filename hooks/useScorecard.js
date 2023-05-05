@@ -1,10 +1,12 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import uuid from 'react-native-uuid';
 
 export default function useScorecard(isCompetitionScore, competitionId, archerId, roundName, stageId, bowType) {
 	const [scorecard, setScorecard] = useState([]);
 	const [toggle, setToggle] = useState(false);
-
+	console.log("uuid length", uuid.v4().length)
+	
 	useEffect(() => {
 		const createScorecardIfNotExists = async (isCompetitionScore, competitionId, archerId, roundName, stageId, bowType) => {
 			await axios.post('http://10.1.1.140:3001/score/exists', {
@@ -70,43 +72,5 @@ export default function useScorecard(isCompetitionScore, competitionId, archerId
 		createScorecardIfNotExists(isCompetitionScore, competitionId, archerId, roundName, stageId, bowType);
 	}, [])
 
-	return {
-	}
+	return {}
 }
-
-
-
-// useEffect(() => {
-// 	const createScorecardIfNotExists = async (isCompetitionScore, competitionId, archerId, roundName, stageId, bowType) => {
-// 		axios.post('http://10.1.1.140:3001/score/exists', {
-// 			isCompetitionScore, 
-// 			competitionId,
-// 			archerId,
-// 			roundName,
-// 			stageId,
-// 			bowType
-// 		}).then(res => {
-// 			let exists = res.data[0].exists; 
-
-// 			if (!exists) {	// create scorecard
-// 				await axios.post('http://10.1.1.140:3001/score/add', {
-// 					isCompetitionScore, 
-// 					competitionId,
-// 					archerId,
-// 					roundName,
-// 					stageId,
-// 					bowType
-// 				})
-
-
-				
-// 				// create ends
-// 			} else {
-// 				//get scorecard
-// 			}
-// 		})
-// 	}
-
-// 	createScorecardIfNotExists(isCompetitionScore, competitionId, archerId, roundName, stageId, bowType);
-
-// }, [])

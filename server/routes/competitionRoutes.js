@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllCompetitions, getCompetitionPlayers, removeArcherFromCompetition, addArcherToCompetition, addNewCompetition, getAllCompetitionRounds, getCompetitionRounds, addRoundToCompetition, removeRoundFromCompetition, getPlayersAvailableRounds, getPlayersAvailableBows, getCompetitionStages } from '../controllers/competitionControllers.js';
+import { getAllCompetitions, getCompetitionPlayers, removeArcherFromCompetition, addArcherToCompetition, addNewCompetition, getAllCompetitionRounds, getCompetitionRounds, addRoundToCompetition, removeRoundFromCompetition, getPlayersAvailableRounds, getPlayersAvailableBows, getCompetitionStages, getCompetitionPlayersForRound } from '../controllers/competitionControllers.js';
 
 const competitionRouter = express.Router();
 
@@ -10,6 +10,7 @@ competitionRouter.post('/rounds/add', addRoundToCompetition);
 competitionRouter.post('/rounds/remove', removeRoundFromCompetition);
 competitionRouter.post('/add', addNewCompetition);
 competitionRouter.post('/id', getCompetitionPlayers);
+competitionRouter.post('/id/round', getCompetitionPlayersForRound);
 competitionRouter.post('/archer/remove', removeArcherFromCompetition);
 competitionRouter.post('/archer/add', addArcherToCompetition);
 competitionRouter.post('/rounds/archer/id', getPlayersAvailableRounds);

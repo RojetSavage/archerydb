@@ -16,8 +16,8 @@ export default function AddPlayerScoreStack({navigation}) {
 			<Stack.Screen name="Add Player Score Menu" component={AddPlayerScoreMenu}/>			
 			<Stack.Screen name="Select Competition" component={SelectCompetition}/>			
 			<Stack.Screen name="Select Round" component={SelectCompetitionRound}/>			
-			<Stack.Screen name="Select Player" component={SelectPlayerForCompetition}/>			
-			<Stack.Screen name="Select Player's Stage" component={SelectPlayersCompetitionStage}/>			
+			<Stack.Screen name="Select Player" component={SelectPlayerForCompetition}/>	
+			<Stack.Screen name="Select Player's Stage" component={SelectPlayersCompetitionStage}/>		
 			<Stack.Screen name="Select Player's Bow" component={SelectPlayersCompetitionBow}/>			
 			<Stack.Screen name="Add Player's Competition Score" component={AddPlayersCompetitionScore}/>			
 		</Stack.Navigator>	

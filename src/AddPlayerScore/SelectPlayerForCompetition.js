@@ -3,16 +3,16 @@ import { useState, useEffect } from 'react'
 import Archer from './Archer'
 
 export default function SelectPlayerForCompetition({ route }) {
-	const { id } = route.params;
-	const [competitionArchers, setCompetitionArchers] = useState([])
+	const { competitionId, roundName } = route.params;
+	const [competitionArchers, setCompetitionArchers] = useState([]);
 
 	useEffect(() => {
-		fetch('http://10.1.1.140:3001/competition/id', {
+		fetch('http://10.1.1.140:3001/competition/id/round', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
 			},
-			body: JSON.stringify({ id })
+			body: JSON.stringify({ competitionId, roundName })
 		})
 			.then(res => res.json())
 			.then(data => {
@@ -22,7 +22,7 @@ export default function SelectPlayerForCompetition({ route }) {
 
 	return (
 		<View>
-			{competitionArchers.map((archer, idx) => <Archer competitionId={id} archerId={archer.archer_id} archerName={archer.name} classificationType={archer.classification_type} idx={idx} />)}
+			{competitionArchers.map((archer, idx) => <Archer competitionId={competitionId} archerId={archer.id} archerName={archer.name} classificationType={archer.classification_type} idx={idx} roundName={roundName} />)}
 		</View>
 	)
 }
