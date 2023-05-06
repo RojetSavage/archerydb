@@ -1,15 +1,68 @@
 import axios from 'axios';
 import { useState, useEffect } from 'react';
-import uuid from 'react-native-uuid';
 
-export default function useScorecard(isCompetitionScore, competitionId, archerId, roundName, stageId, bowType) {
+export default function useScorecard(isCompetitionScore, competitionId, archerId, roundName, stageId, bowType, roundType) {
 	const [scorecard, setScorecard] = useState([]);
-	const [toggle, setToggle] = useState(false);
-	console.log("uuid length", uuid.v4().length)
-	
+	const [toggleUpdate, setToggleUpdate] = useState(false);
+
 	useEffect(() => {
-		const createScorecardIfNotExists = async (isCompetitionScore, competitionId, archerId, roundName, stageId, bowType) => {
-			await axios.post('http://10.1.1.140:3001/score/exists', {
+		createScorecardIfNotExists();
+	}, [])
+
+	useEffect(() => {
+		getScorecard();
+	}, [toggleUpdate])
+
+	function alterScorecard(endNumber, arrowNumber, newScore) {
+		if (!endNumber || !arrowNumber) return;
+		else {
+			let newScorecard = [...scorecard];
+			newScorecard[endNumber - 1][arrowNumber] = newScore;
+	
+			setScorecard(newScorecard);
+		}
+	}
+
+	function saveScorecard() {
+		let promiseArray = [];
+		
+		scorecard.forEach(end => {
+			promiseArray.push(fetch("http://10.1.1.140:3001/score/ends/update", {
+				method:"POST",
+				headers: {
+					"Content-Type":"application/json"
+				},
+				body: JSON.stringify({
+					id:end.id, 
+					end_number:end.end_number, 
+					arrow1_score:end.arrow1_score, 
+					arrow2_score: end.arrow2_score,  
+					arrow3_score: end.arrow3_score,  
+					arrow4_score: end.arrow4_score,  
+					arrow5_score: end.arrow5_score,  
+					arrow6_score: end.arrow6_score
+				 })
+			}))
+		})
+		Promise.all(promiseArray).then(_ => console.log("Updated all ends"))
+	}
+
+	function getScorecard() {
+		axios.post('http://10.1.1.140:3001/score/scorecard', {
+			isCompetitionScore, 
+			competitionId,
+			archerId,
+			roundName,
+			stageId,
+			bowType
+		})
+		.then(res => {
+			setScorecard(res.data)
+		})
+	}
+
+	function createScorecardIfNotExists() {
+			axios.post('http://10.1.1.140:3001/score/exists', {
 				isCompetitionScore, 
 				competitionId,
 				archerId,
@@ -44,33 +97,22 @@ export default function useScorecard(isCompetitionScore, competitionId, archerId
 							const { stageScoreId } = res.data[0]
 							console.log("stage score id", stageScoreId)
 							axios.post('http://10.1.1.140:3001/score/ends/add', {
-								stageScoreId
+								stageScoreId,
+								roundType
 							})
 							.then(res => {
-								console.log("added ends", res.data)
-								// this should trigger the rerender to go through scorecard exists which reruns the get scorecard query
-								setToggle(prevState => !prevState)
+								setToggleUpdate(prevState => !prevState)
 							})
 						})
 					})
 				}
-
-				// Get Scorecard
-				axios.post('http://10.1.1.140:3001/score/exists', {
-					isCompetitionScore, 
-					competitionId,
-					archerId,
-					roundName,
-					stageId,
-					bowType
-				})
-				.then(res => {
-					setScorecard(res.data[0])
-				})
 			})
-		}
-		createScorecardIfNotExists(isCompetitionScore, competitionId, archerId, roundName, stageId, bowType);
-	}, [])
-
-	return {}
+	}
+	
+	return {
+		scorecard,
+		alterScorecard,
+		saveScorecard,
+		toggleUpdate
+	}
 }

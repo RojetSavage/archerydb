@@ -3,7 +3,6 @@ import React from 'react'
 import { Input, CheckBox, Button } from '@rneui/base'
 import { useState} from 'react';
 import { isExists } from 'date-fns';
-import axios from 'axios';
 
 export default function CreateCompetition() {
 	const [name, setName] = useState('');

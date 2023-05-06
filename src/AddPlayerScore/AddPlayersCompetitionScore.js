@@ -1,38 +1,24 @@
 import { StyleSheet, View } from 'react-native'
-import { useState, useEffect } from 'react'
+import {useEffect} from 'react';
 import Keyboard from './scorecardComponents/Keyboard';
 import RoundInfo from './scorecardComponents/RoundInfo';
 import Scorecard from './scorecardComponents/Scorecard'
 import SaveButton from './scorecardComponents/SaveButton';
 import useScorecard from '../../hooks/useScorecard';
 
-
-function getInitState(roundType) {
-	let numRounds = roundType.slice(0,2) === "30" ? 5 : 6;
-	let rounds= [];
-
-	for (let i = 0; i < numRounds; i++) {
-		rounds.push([0,0,0,0,0,0])
-	}
-	return rounds;
-}
-
 export default function AddPlayersCompetitionScore({ route }) {
 	const { playerName, competitionId, archerClassification, bowType, roundName, archerId, roundType, distance, stageId } = route.params;
-	const [scorecardResults, setScorecardResults] = useState(getInitState("36"))
-	const [selectedCell, setSelectedCell] = useState({end:0, arrow: 0})
-	
-	const res = useScorecard(true, competitionId, archerId, roundName, stageId, bowType)
-	
+	const {scorecard, alterScorecard, saveScorecard, toggleUpdate} = useScorecard(true, competitionId, archerId, roundName, stageId, bowType, roundType)
+
+	useEffect(() => {
+	}, [toggleUpdate])
+
 	return (	
 		<View style={styles.container}>
-		<RoundInfo playerName={playerName} archerClassification={archerClassification} bowType={bowType} roundType={roundType} distance={distance} roundName={roundName} />
-		
-		<Scorecard results={scorecardResults}  />
-		
-		<Keyboard setResults={setScorecardResults} />
-
-		<SaveButton />
+			<RoundInfo playerName={playerName} archerClassification={archerClassification} bowType={bowType} roundType={roundType} distance={distance} roundName={roundName} />
+			<Scorecard results={scorecard}  />
+			<Keyboard alterScorecard={alterScorecard} />
+			<SaveButton save={saveScorecard} />
 		</View>
 		)
 	}

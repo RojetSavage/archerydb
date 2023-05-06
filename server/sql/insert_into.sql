@@ -391,7 +391,8 @@ insert into archer (name, classification_type, birthdate, gender) values
 **										*/
 
 INSERT INTO competition (name, is_club_championship, date) VALUES 
-("Competition 1", false, "2023-04-17")
+("The Thriller In Manilla", false, "2023-04-17"),
+("The Runble In The Jungle", true, "2023-04-18")
 
 
 INSERT INTO competition_rounds VALUES
@@ -414,28 +415,26 @@ INSERT INTO competition_archers (competition_id, archer_id) VALUES
 **									**
 **									*/
 
--- Set this score to using a UUID. By having the UUID when we create the score entry I can create and immeditaely associate the end score with it --
-
-INSERT INTO stage_score (is_competition_score, competition_id, archer_id, round_name, stage_id, bow_type) VALUES 
-(1, 1, 1, "WA90/1440", 1, "Recurve")
-
-INSERT INTO end (stage_score_id, end_number, arrow1_score, arrow2_score, arrow3_score, arrow4_score, arrow5_score, arrow6_score) VALUES
-	(uuid, 1, '0', '0', '0', '0', '0', '0'), 
-	(uuid, 2, '0', '0', '0', '0', '0', '0'), 
-	(uuid, 3, '0', '0', '0', '0', '0', '0'), 
-	(uuid, 4, '0', '0', '0', '0', '0', '0'), 
-	(uuid, 5, '0', '0', '0', '0', '0', '0'), 
-	(uuid, 6, '0', '0', '0', '0', '0', '0')
-
-
-START TRANSACTION
+START TRANSACTION;
 	INSERT INTO stage_score (id, is_competition_score, competition_id, archer_id, round_name, stage_id, bow_type) VALUES 
-	(uuid, 1, 1, 1, "WA90/1440", 1, "Recurve");
+		("uuid", 1, 1, 1, "WA90/1440", 1, "Recurve");
 	INSERT INTO end (stage_score_id, end_number, arrow1_score, arrow2_score, arrow3_score, arrow4_score, arrow5_score, arrow6_score) VALUES
-		(uuid, 1, '0', '0', '0', '0', '0', '0'), 
-		(uuid, 2, '0', '0', '0', '0', '0', '0'), 
-		(uuid, 3, '0', '0', '0', '0', '0', '0'), 
-		(uuid, 4, '0', '0', '0', '0', '0', '0'), 
-		(uuid, 5, '0', '0', '0', '0', '0', '0'), 
-		(uuid, 6, '0', '0', '0', '0', '0', '0')
+	("uuid", 1, '0', '0', '0', '0', '0', '0'), 
+	("uuid", 2, '0', '0', '0', '0', '0', '0'), 
+	("uuid", 3, '0', '0', '0', '0', '0', '0'), 
+	("uuid", 4, '0', '0', '0', '0', '0', '0'), 
+	("uuid", 5, '0', '0', '0', '0', '0', '0'), 
+	("uuid", 6, '0', '0', '0', '0', '0', '0');
+COMMIT
+
+START TRANSACTION;
+	INSERT INTO stage_score (id, is_competition_score, competition_id, archer_id, round_name, stage_id, bow_type) VALUES 
+		(${id}, ${isCompetitionScore}, ${competitionId}, ${archerId}, "${roundName}", ${stageId}, "${bowType}");
+	INSERT INTO end (stage_score_id, end_number, arrow1_score, arrow2_score, arrow3_score, arrow4_score, arrow5_score, arrow6_score) VALUES
+	("${id}", 1, '0', '0', '0', '0', '0', '0'), 
+	("${id}", 2, '0', '0', '0', '0', '0', '0'), 
+	("${id}", 3, '0', '0', '0', '0', '0', '0'), 
+	("${id}", 4, '0', '0', '0', '0', '0', '0'), 
+	("${id}", 5, '0', '0', '0', '0', '0', '0'), 
+	("${id}", 6, '0', '0', '0', '0', '0', '0');
 COMMIT

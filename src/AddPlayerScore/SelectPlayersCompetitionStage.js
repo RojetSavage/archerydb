@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { useState, useEffect } from 'react'
 import Stage from './Stage'
 export default function SelectPlayersCompetitionStage({ route }) {

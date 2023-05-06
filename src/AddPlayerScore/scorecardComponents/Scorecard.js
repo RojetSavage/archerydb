@@ -14,8 +14,7 @@ export default function Scorecard({ results }) {
 	return (
 		<View style={styles.container}>
 			<ScorecardHeader />
-
-			{results.map((_, idx) => <ScorecardRow end={results[idx]} idx={idx} endNumber={idx+1} key={idx}/>)}
+			{results.map((end, idx) => <ScorecardRow key={idx} end={end} idx={idx} endNumber={end.end_number} />)}
 		</View>
 	)
 }

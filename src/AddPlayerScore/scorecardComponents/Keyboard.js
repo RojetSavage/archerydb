@@ -2,32 +2,32 @@ import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from 'react-nati
 import React from 'react'
 import useScorecardContext from '../../contexts/ScorecardContextProvider'
 
-export default function Keyboard({ setResults }) {
-	const { handleValueChange } = useScorecardContext();
-
+export default function Keyboard({ alterScorecard }) {
+	const {selectedCell} = useScorecardContext();
+	console.log(selectedCell)
 
 	return (
 		<View style={styles.keyboard}>
 
 			<View style={styles.row}>
-				<TouchableOpacity onPress={() => handleValueChange(setResults, 'X')} style={{ ...styles.baseButton, ...styles.yellow }}><Text style={styles.baseText}>X</Text></TouchableOpacity>
-				<TouchableOpacity onPress={() => handleValueChange(setResults, '10')} style={{ ...styles.baseButton, ...styles.yellow }}><Text style={styles.baseText}>10</Text></TouchableOpacity>
-				<TouchableOpacity onPress={() => handleValueChange(setResults, '9')} style={{ ...styles.baseButton, ...styles.yellow }}><Text style={styles.baseText}>9</Text></TouchableOpacity>
-				<TouchableOpacity onPress={() => handleValueChange(setResults, '8')} style={{ ...styles.baseButton, ...styles.red }}><Text style={styles.baseText}>8</Text></TouchableOpacity>
+				<TouchableOpacity onPress={() => alterScorecard(selectedCell.end, `arrow${selectedCell.arrow}_score`, 'X')} style={{ ...styles.baseButton, ...styles.yellow }}><Text style={styles.baseText}>X</Text></TouchableOpacity>
+				<TouchableOpacity onPress={() => alterScorecard(selectedCell.end, `arrow${selectedCell.arrow}_score`, '10')} style={{ ...styles.baseButton, ...styles.yellow }}><Text style={styles.baseText}>10</Text></TouchableOpacity>
+				<TouchableOpacity onPress={() => alterScorecard(selectedCell.end, `arrow${selectedCell.arrow}_score`, '9')} style={{ ...styles.baseButton, ...styles.yellow }}><Text style={styles.baseText}>9</Text></TouchableOpacity>
+				<TouchableOpacity onPress={() => alterScorecard(selectedCell.end, `arrow${selectedCell.arrow}_score`, '8')} style={{ ...styles.baseButton, ...styles.red }}><Text style={styles.baseText}>8</Text></TouchableOpacity>
 			</View>
 
 			<View style={styles.row}>
-				<TouchableOpacity onPress={() => handleValueChange(setResults, '4')} style={{ ...styles.baseButton, ...styles.black }}><Text style={{ ...styles.baseText, color: "white" }}>4</Text></TouchableOpacity>
-				<TouchableOpacity onPress={() => handleValueChange(setResults, '5')} style={{ ...styles.baseButton, ...styles.blue }}><Text style={styles.baseText}>5</Text></TouchableOpacity>
-				<TouchableOpacity onPress={() => handleValueChange(setResults, '6')} style={{ ...styles.baseButton, ...styles.blue }}><Text style={styles.baseText}>6</Text></TouchableOpacity>
-				<TouchableOpacity onPress={() => handleValueChange(setResults, '7')} style={{ ...styles.baseButton, ...styles.red }}><Text style={styles.baseText}>7</Text></TouchableOpacity>
+				<TouchableOpacity onPress={() => alterScorecard(selectedCell.end, `arrow${selectedCell.arrow}_score`, '4')} style={{ ...styles.baseButton, ...styles.black }}><Text style={{ ...styles.baseText, color: "white" }}>4</Text></TouchableOpacity>
+				<TouchableOpacity onPress={() => alterScorecard(selectedCell.end, `arrow${selectedCell.arrow}_score`, '5')} style={{ ...styles.baseButton, ...styles.blue }}><Text style={styles.baseText}>5</Text></TouchableOpacity>
+				<TouchableOpacity onPress={() => alterScorecard(selectedCell.end, `arrow${selectedCell.arrow}_score`, '6')} style={{ ...styles.baseButton, ...styles.blue }}><Text style={styles.baseText}>6</Text></TouchableOpacity>
+				<TouchableOpacity onPress={() => alterScorecard(selectedCell.end, `arrow${selectedCell.arrow}_score`, '7')} style={{ ...styles.baseButton, ...styles.red }}><Text style={styles.baseText}>7</Text></TouchableOpacity>
 			</View>
 
 			<View style={styles.row}>
-				<TouchableOpacity onPress={() => handleValueChange(setResults, '3')} style={{ ...styles.baseButton, ...styles.black }}><Text style={{ ...styles.baseText, color: "white" }}>3</Text></TouchableOpacity>
-				<TouchableOpacity onPress={() => handleValueChange(setResults, '2')} style={{ ...styles.baseButton, ...styles.white }}><Text style={styles.baseText}>2</Text></TouchableOpacity>
-				<TouchableOpacity onPress={() => handleValueChange(setResults, '1')} style={{ ...styles.baseButton, ...styles.white }}><Text style={styles.baseText}>1</Text></TouchableOpacity>
-				<TouchableOpacity onPress={() => handleValueChange(setResults, 'M')} style={{ ...styles.baseButton, ...styles.white }}><Text style={styles.baseText}>M</Text></TouchableOpacity>
+				<TouchableOpacity onPress={() => alterScorecard(selectedCell.end, `arrow${selectedCell.arrow}_score`,'3')} style={{ ...styles.baseButton, ...styles.black }}><Text style={{ ...styles.baseText, color: "white" }}>3</Text></TouchableOpacity>
+				<TouchableOpacity onPress={() => alterScorecard(selectedCell.end, `arrow${selectedCell.arrow}_score`,'2')} style={{ ...styles.baseButton, ...styles.white }}><Text style={styles.baseText}>2</Text></TouchableOpacity>
+				<TouchableOpacity onPress={() => alterScorecard(selectedCell.end, `arrow${selectedCell.arrow}_score`,'1')} style={{ ...styles.baseButton, ...styles.white }}><Text style={styles.baseText}>1</Text></TouchableOpacity>
+				<TouchableOpacity onPress={() => alterScorecard(selectedCell.end, `arrow${selectedCell.arrow}_score`,'M')} style={{ ...styles.baseButton, ...styles.white }}><Text style={styles.baseText}>M</Text></TouchableOpacity>
 			</View>
 
 		</View>

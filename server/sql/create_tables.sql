@@ -1,5 +1,4 @@
--- PRIMARY DEFINITION TABLES --
--- ie. defining what makes up a competition --
+-- TABLE DEFINITIONS --
 CREATE TABLE bow(
 	type VARCHAR(30) PRIMARY KEY UNIQUE NOT NULL 	
 ) 
@@ -62,7 +61,6 @@ CREATE TABLE available_competition_rounds(
 )
 
 
--- defining new competitions --
 CREATE TABLE competition(
 	id INT PRIMARY KEY NOT NULL UNIQUE AUTO_INCREMENT,
 	name VARCHAR(50),
@@ -86,10 +84,6 @@ CREATE TABLE competition_archers(
 	FOREIGN KEY (archer_id) REFERENCES archer(id)
 )
 
-
-
-
---Defining new scores--
 CREATE TABLE stage_score (
 	id INT UNIQUE NOT NULL AUTO_INCREMENT,
 	datetime DATETIME NOT NULL DEFAULT current_timestamp(),
@@ -107,16 +101,6 @@ CREATE TABLE stage_score (
 	FOREIGN KEY (bow_type) REFERENCES bow(type)
 )
 
---check if score exists / count entries--
-SELECT count(id) AS "exists" FROM stage_score WHERE is_competition_score=1 AND competition_id=1 AND archer_id=3 AND round_name="WA90/1440" AND stage_id=1 AND bow_type="Recurve"
-
-
--- IF not equal 1 --
--- Insert a new stage score --
-INSERT INTO stage_score (is_competition_score, competition_id, archer_id, round_name, stage_id, bow_type) VALUES 
-(1,1,3,"WA90/1440", 1,"Recurve")
-
-
 CREATE TABLE end(
 	id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	stage_score_id INT NOT NULL,
@@ -130,21 +114,4 @@ CREATE TABLE end(
 	FOREIGN KEY (stage_score_id) REFERENCES stage_score(id)
 )
 
--- get the id for a score --
-SELECT id FROM stage_score WHERE is_competition_score=1 AND competition_id=1 AND archer_id=3 AND round_name="WA90/1440" AND stage_id=1 AND bow_type="Recurve"
 
--- insert the correct number of ends into the score --
-INSERT INTO end (score_id, end_number, arrow1_score, arrow2_score, arrow3_score, arrow4_score, arrow5_score, arrow6_score) VALUES
-(1, 1, '0', '0', '0', '0', '0', '0'),
-(1, 2, '0', '0', '0', '0', '0', '0'),
-(1, 3, '0', '0', '0', '0', '0', '0'),
-(1, 4, '0', '0', '0', '0', '0', '0'),
-(1, 5, '0', '0', '0', '0', '0', '0')
-(1, 6, '0', '0', '0', '0', '0', '0')
-
-
-
--- As soon as we open up the scorecard 
--- query the database for a stage_score entry and the associated ends
--- populate the scorecard
--- if no entry, create score entry, create 5/6 ends and associate them with the stage_score id 
