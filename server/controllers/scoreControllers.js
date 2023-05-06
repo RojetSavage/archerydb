@@ -42,7 +42,7 @@ export const getStageId = async (req, res) => {
 
 export const addEndsToStage = async (req, res) => {
 	const { stageScoreId, roundType } = req.body;
-	const query = createInsertEndQuery(stageScoreId, roundType);
+	const query = createInsertEndsQuery(stageScoreId, roundType);
 
 	db.query(query,
 		(err, result) => {
