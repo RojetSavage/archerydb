@@ -9,7 +9,6 @@ import useScorecard from '../../hooks/useScorecard';
 export default function AddPlayersCompetitionScore({ route }) {
 	const { playerName, competitionId, archerClassification, bowType, roundName, archerId, roundType, distance, stageId } = route.params;
 	const {scorecard, alterScorecard, saveScorecard, toggleUpdate} = useScorecard(true, competitionId, archerId, roundName, stageId, bowType, roundType)
-
 	useEffect(() => {
 	}, [toggleUpdate])
 

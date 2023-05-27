@@ -2,7 +2,7 @@ import { StyleSheet, View } from 'react-native'
 import { ListItem, Avatar, Button, Icon } from '@rneui/base'
 
 export default function Archer({ archer_id, compId, name, gender, classification_type, inComp, setToggleUpdate }) {
-	const endpointURL = inComp ? 'http://10.1.1.140:3001/competition/archer/remove' : 'http://10.1.1.140:3001/competition/archer/add'
+	const endpointURL = inComp ? 'http://192.168.170.46:3001/competition/archer/remove' : 'http://192.168.170.46:3001/competition/archer/add'
 
 	
 	function handleSubmit() {

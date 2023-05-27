@@ -11,13 +11,13 @@ export default function getArcherClassification(gender, birthdate) {
 		return `Under 16 ${gender}`
 	} else if (age < 18) {
 		return `Under 18 ${gender}`
-	} else if (age < 21) {
+	} else if (age <= 21) {
 		return `Under 21 ${gender}`
 	} else if (age > 70) {
 		return `70+ ${gender}`
 	} else if (age > 60) {
 		return `60+ ${gender}`
-	} else if (age > 50) {
+	} else if (age >= 50) {
 		return `50+ ${gender}`
 	} 
 }

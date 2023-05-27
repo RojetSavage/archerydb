@@ -7,14 +7,14 @@ export const createArcher = async (req, res) => {
 		if (err) {
 			res.send(err)
 		} else {
-			res.send("YES BITCH");
+			res.send("Donezo");
 		}
 	})
 }
 
 
 export const getAllArchers = async (req, res) => {
-		db.query("SELECT * FROM archer", (err, result) => {
+		db.query("SELECT * FROM archer LIMIT 100", (err, result) => {
 			if (err) {
 				res.send(err)
 			} else {

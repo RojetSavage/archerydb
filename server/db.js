@@ -1,6 +1,5 @@
 import mysql from 'mysql';
 
-
 // const db = mysql.createConnection({
 // 	host:"dev-env.c6jvdejtnssc.ap-southeast-2.rds.amazonaws.com",
 // 	user:"root",
@@ -12,9 +11,8 @@ const db = mysql.createConnection({
 	host:"localhost",
 	user:"root",
 	password:"password",
-	database:"archerydb"
+	database:"archerydbbackup"
 })
-
 
 db.connect((err) => {
 	if (err) throw err;

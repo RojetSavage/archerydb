@@ -15,7 +15,7 @@ export default function useCreatePlayer() {
 	let formattedBirthdate = `${birthdate.year}-${birthdate.month}-${birthdate.day}`
 
 	function handleSubmit() {
-		fetch('http://10.1.1.140:3001/archer', {
+		fetch('http://192.168.170.46:3001/archer', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -41,7 +41,7 @@ export default function useCreatePlayer() {
 	}
 
 	function handleSubmitEdit(id) {
-		fetch('http://10.1.1.140:3001/archer/id', {
+		fetch('http://192.168.170.46:3001/archer/id', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"

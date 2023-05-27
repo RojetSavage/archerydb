@@ -18,7 +18,7 @@ export default function App() {
     <ScorecardContextProvider>
       <NavigationContainer>
         <Stack.Navigator>
-          <Stack.Screen name="Menu" component={Menu} />
+          <Stack.Screen name="ArcheryDB" component={Menu} />
           <Stack.Screen name="Create Player" component={CreatePlayer} />
           <Stack.Screen name="View Players" component={ViewPlayers} />
           <Stack.Screen name="Create Competition" component={CreateCompetition} />

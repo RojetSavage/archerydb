@@ -13,14 +13,14 @@ export default function AddRoundsToCompetition({ route }) {
 	let competitionRoundNames = competitionRounds.map(round => round.round_name) 
 
 	useEffect(() => {
-		fetch('http://10.1.1.140:3001/competition/rounds')
+		fetch('http://192.168.170.46:3001/competition/rounds')
 			.then(res => res.json())
 			.then(data => {
 				setAllRounds(data);
 				setLoading(false);
 			})
 
-		fetch('http://10.1.1.140:3001/competition/rounds/id', {
+		fetch('http://192.168.170.46:3001/competition/rounds/id', {
 			method:"POST",
 			headers: {
 				"Content-Type":"application/json"

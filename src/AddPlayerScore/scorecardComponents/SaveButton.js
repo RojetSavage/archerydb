@@ -9,6 +9,7 @@ export default function SaveButton({save}) {
 		save();
 		navigation.pop();
 		navigation.pop();
+		navigation.pop();
 	}
 
 	return (

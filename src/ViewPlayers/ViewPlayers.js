@@ -8,9 +8,10 @@ export default function ViewPlayers() {
 	const [loading, setLoading] = useState(true);
 
 	async function getArchers() {
-		fetch('http://10.1.1.140:3001/archer')
+		fetch('http://192.168.170.46:3001/archer')
 		.then(res => res.json())
 		.then(data => {
+			console.log("fetch request")
 			setArchers(data);
 			setLoading(false);
 		})

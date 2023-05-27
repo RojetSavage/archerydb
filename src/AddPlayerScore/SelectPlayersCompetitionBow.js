@@ -7,7 +7,7 @@ export default function SelectPlayersCompetitionBow({ route }) {
 	const [playersAvailableBows, setPlayersAvailableBows] = useState([])
 
 	useEffect(() => {
-		fetch('http://10.1.1.140:3001/competition/rounds/archer/bow/id', {
+		fetch('http://192.168.170.46:3001/competition/rounds/archer/bow/id', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"

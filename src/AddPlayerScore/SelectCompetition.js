@@ -6,7 +6,7 @@ export default function SelectCompetition() {
 	const [competitions, setCompetitions] = useState([]);
 
 	function fetchCompetitions() {
-		fetch('http://10.1.1.140:3001/competition')
+		fetch('http://192.168.170.46:3001/competition')
 			.then(res => res.json())
 			.then(data => setCompetitions(data))
 	}

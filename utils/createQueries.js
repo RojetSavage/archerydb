@@ -6,10 +6,13 @@ function createInsertEndsQuery(stageScoreId, roundType) {
 	for (let i = 0; i< ends; i++) {
 		values.push(`(${stageScoreId}, ${i+1}, '0', '0', '0', '0', '0', '0')`)
 	}
-	values.join(', ');
-	let finalQuery = [...baseQuery, ...values];
 
-	return finalQuery[0];
+	values = values.join(', ');
+	baseQuery.push(values)
+	let finalQuery = baseQuery.join(' ');
+
+	console.log("function final query", finalQuery)
+	return finalQuery;
 }
 
 export {

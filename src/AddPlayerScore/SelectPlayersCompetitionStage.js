@@ -6,7 +6,7 @@ export default function SelectPlayersCompetitionStage({ route }) {
 	const [availableStages, setAvailableStages] = useState([])
 
 	useEffect(() => {
-		fetch('http://10.1.1.140:3001/competition/rounds/stages', {
+		fetch('http://192.168.170.46:3001/competition/rounds/stages', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"

@@ -27,7 +27,7 @@ export default function CreateCompetition() {
 	}
 
 	function handleSubmit() {
-		fetch('http://10.1.1.140:3001/competition/add', {
+		fetch('http://192.168.170.46:3001/competition/add', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"

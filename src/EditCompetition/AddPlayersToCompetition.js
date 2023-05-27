@@ -11,7 +11,7 @@ export default function AddPlayersToCompetition({ route }) {
 	let competitionArcherIds = competitionPlayers.length != 0 ? competitionPlayers?.map(archer => archer.archer_id) : [];
 
 	useEffect(() => {
-		fetch('http://10.1.1.140:3001/competition/id', {
+		fetch('http://192.168.170.46:3001/competition/id', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -23,7 +23,7 @@ export default function AddPlayersToCompetition({ route }) {
 				setCompetitionPlayers(data)
 			})
 
-		fetch('http://10.1.1.140:3001/archer')
+		fetch('http://192.168.170.46:3001/archer')
 			.then(res => res.json())
 			.then(data => {
 				setAllArchers(data.map(archer => {

@@ -7,7 +7,7 @@ export default function SelectCompetitionRound({ route }) {
 	const [availableCompetitionRounds, setAvailableCompetitionRounds] = useState([])
 
 	useEffect(() => {
-		fetch('http://10.1.1.140:3001/competition/rounds/id', {
+		fetch('http://192.168.170.46:3001/competition/rounds/id', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"

@@ -7,7 +7,7 @@ export default function SelectPlayerForCompetition({ route }) {
 	const [competitionArchers, setCompetitionArchers] = useState([]);
 
 	useEffect(() => {
-		fetch('http://10.1.1.140:3001/competition/id/round', {
+		fetch('http://192.168.170.46:3001/competition/id/round', {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json"
@@ -22,7 +22,7 @@ export default function SelectPlayerForCompetition({ route }) {
 
 	return (
 		<View>
-			{competitionArchers.map((archer, idx) => <Archer competitionId={competitionId} archerId={archer.id} archerName={archer.name} classificationType={archer.classification_type} idx={idx} roundName={roundName} />)}
+			{competitionArchers.map((archer, idx) => <Archer competitionId={competitionId} archerId={archer.id} archerName={archer.name} key={idx}r classificationType={archer.classification_type} idx={idx} roundName={roundName} />)}
 		</View>
 	)
 }

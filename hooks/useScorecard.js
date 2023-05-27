@@ -27,7 +27,7 @@ export default function useScorecard(isCompetitionScore, competitionId, archerId
 		let promiseArray = [];
 		
 		scorecard.forEach(end => {
-			promiseArray.push(fetch("http://10.1.1.140:3001/score/ends/update", {
+			promiseArray.push(fetch("http://192.168.170.46:3001/score/ends/update", {
 				method:"POST",
 				headers: {
 					"Content-Type":"application/json"
@@ -48,7 +48,8 @@ export default function useScorecard(isCompetitionScore, competitionId, archerId
 	}
 
 	function getScorecard() {
-		axios.post('http://10.1.1.140:3001/score/scorecard', {
+		console.log("getting scorecard")
+		axios.post('http://192.168.170.46:3001/score/scorecard', {
 			isCompetitionScore, 
 			competitionId,
 			archerId,
@@ -57,12 +58,14 @@ export default function useScorecard(isCompetitionScore, competitionId, archerId
 			bowType
 		})
 		.then(res => {
+			console.log(res.data)
 			setScorecard(res.data)
 		})
+		.catch((err) => { console.log(err) } )
 	}
 
 	function createScorecardIfNotExists() {
-			axios.post('http://10.1.1.140:3001/score/exists', {
+			axios.post('http://192.168.170.46:3001/score/exists', {
 				isCompetitionScore, 
 				competitionId,
 				archerId,
@@ -74,7 +77,7 @@ export default function useScorecard(isCompetitionScore, competitionId, archerId
 
 				//create scorecard if not exists
 				if (!exists) {	
-					axios.post('http://10.1.1.140:3001/score/add', {
+					axios.post('http://192.168.170.46:3001/score/add', {
 						isCompetitionScore, 
 						competitionId,
 						archerId,
@@ -82,9 +85,11 @@ export default function useScorecard(isCompetitionScore, competitionId, archerId
 						stageId,
 						bowType
 					}).then(res => {
+						console.log("scorecard doesn't exist")
+						console.log(isCompetitionScore, competitionId,archerId,roundName,stageId,bowType)
 
 						//get scorecard id now that it does exist
-						axios.post('http://10.1.1.140:3001/score/id', {
+						axios.post('http://192.168.170.46:3001/score/id', {
 							isCompetitionScore, 
 							competitionId,
 							archerId,
@@ -93,10 +98,11 @@ export default function useScorecard(isCompetitionScore, competitionId, archerId
 							bowType
 						})
 						.then(res => {
+							console.log("res", res.data)
 							//add 6 ends attached to the stage_score_id
 							const { stageScoreId } = res.data[0]
 							console.log("stage score id", stageScoreId)
-							axios.post('http://10.1.1.140:3001/score/ends/add', {
+							axios.post('http://192.168.170.46:3001/score/ends/add', {
 								stageScoreId,
 								roundType
 							})
